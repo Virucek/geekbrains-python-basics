@@ -13,7 +13,7 @@ def sum_num(numbers, stop_symbols):
     Функция возвращает сумму чисел из списка (до тех пор, пока не встретит символ остановки) и флаг остановки
     :param numbers: list
     :param stop_symbols: list
-    :return:
+    :return: sum_numbers: int, stop_flag: int
     """
     # stop_flag - Флаг, обозначающий, что найден специальный символ из stop_symbols
     stop_flag = 0
