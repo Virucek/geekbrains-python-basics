@@ -7,19 +7,21 @@
 Если специальный символ введен после нескольких чисел, то вначале нужно добавить сумму этих чисел к полученной ранее сумме и после этого завершить программу.
 """
 
-# summary - итоговая сумма
-summary = 0
-# stop_symbols - Список специальных символов для завершения программы
-stop_symbols = [
-    '%'
-]
-# stop_flag - Флаг, обозначающий, что найден специальный символ из stop_symbols
-stop_flag = 0
 
-while True:
-    # Формируем список значений из введенной пользователем строки
-    user_numbers = input('Введите числа через пробел').split()
-    for num in user_numbers:
+def sum_num(numbers, stop_symbols):
+    """
+    Функция возвращает сумму чисел из списка (до тех пор, пока не встретит символ остановки) и флаг остановки
+    :param numbers: list
+    :param stop_symbols: list
+    :return:
+    """
+    # stop_flag - Флаг, обозначающий, что найден специальный символ из stop_symbols
+    stop_flag = 0
+
+    # sum_numbers - Сумма чисел из списка
+    sum_numbers = 0
+
+    for num in numbers:
         # Если найден специальный символ, выходим из списка, выставляем флаг остановки
         if num in stop_symbols:
             stop_flag = 1
@@ -31,7 +33,23 @@ while True:
         except ValueError as e:
             continue
         # К сумме добавляем число
-        summary += num
+        sum_numbers += num
+    return sum_numbers, stop_flag
+
+
+# stop_symbols - Список специальных символов для завершения программы
+stop_symbols = [
+    '%'
+]
+# summary - итоговая сумма
+summary = 0
+
+while True:
+    # Формируем список значений из введенной пользователем строки
+    user_numbers = input('Введите числа через пробел').split()
+    # tmp_sum - сумма чисел после каждой итерации (каждого ввода списка чисел пользователем)
+    tmp_sum, stop_flag = sum_num(user_numbers, stop_symbols)
+    summary += tmp_sum
     # Выводим промежуточную сумму
     print(f'Сумма: {summary}')
     # Если выставлен флаг остановки, то выходим из цикла
